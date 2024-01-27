@@ -9,7 +9,9 @@ const jwt = require("jsonwebtoken");
 
 mongoose.set("strictQuery", false);
 
-mongoose.connect("");
+mongoose.connect(
+  "mongodb+srv://mazlum:qqwwqqww11@cluster0.4molq.mongodb.net/psynexa?retryWrites=true&w=majority"
+);
 mongoose.connection.on("open", () => {
   console.log("MongoDB: Connected");
 });
@@ -27,6 +29,7 @@ const reservationRoute = require("./components/reservation/reservationRoute");
 const commentRoute = require("./components/comment/commentRoute");
 const talkRoute = require("./components/talk/talkRoute");
 const testRoute = require("./components/test/testRouter");
+const videosRoute = require("./components/videos/videosRouter");
 const notificationRoute = require("./components/notification/notificationRouter");
 
 const app = express();
@@ -61,6 +64,7 @@ app.use(`${API_PREFIX}/comment`, commentRoute);
 app.use(`${API_PREFIX}/talk`, talkRoute);
 app.use(`${API_PREFIX}/test`, testRoute);
 app.use(`${API_PREFIX}/notification`, notificationRoute);
+app.use(`${API_PREFIX}/videos`, videosRoute);
 app.use(`${API_PREFIX}/verify`, verify);
 
 module.exports = app;

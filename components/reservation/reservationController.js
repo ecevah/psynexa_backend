@@ -492,8 +492,8 @@ const reservationController = {
     try {
       const {
         day,
-        psyc_id,
-        client_id,
+        psyc,
+        client,
         limit,
         skip,
         sort_by,
@@ -511,10 +511,10 @@ const reservationController = {
         .find({
           $or: [
             {
-              psyc_id,
+              psyc_id: psyc,
             },
             {
-              client_id,
+              client_id: client,
             },
             {
               day,
@@ -527,7 +527,7 @@ const reservationController = {
         .select(select)
         .limit(Number(limit))
         .skip(Number(skip));
-      const reservationObjects = reservation.map((item) => ({
+      /*const reservationObjects = reservation.map((item) => ({
         _id: item._id,
         day: item.day,
         time: item.time,
@@ -552,14 +552,12 @@ const reservationController = {
           status: false,
           message: "Find Not Complated No Data",
         });
-      } else {
-        res.json({
-          status: true,
-          message: "Find Completed",
-          total: reservationObjects.length,
-          reservation: reservationObjects,
-        });
-      }
+      } else {*/
+      res.json({
+        status: true,
+        message: "Find Completed",
+        reservation,
+      });
     } catch (error) {
       res.json({
         status: false,
