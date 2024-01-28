@@ -255,8 +255,8 @@ const reservationController = {
           currentTime.getFullYear(),
           currentTime.getMonth(),
           currentTime.getDate(),
-          itemHour - 3,
-          itemMinute
+          itemHour,
+          itemMinute + 5
         );
         if (itemDateTime > currentTime) {
           return true;
@@ -265,7 +265,6 @@ const reservationController = {
         }
       };
       const {
-        day,
         client_id,
         psyc_id,
         limit,
@@ -274,7 +273,6 @@ const reservationController = {
         sort_order,
         select_fields,
       } = req.query;
-      console.log(client_id);
       const today = new Date();
       const date = new Date(today);
       date.setDate(today.getDate() - 1);
@@ -289,9 +287,9 @@ const reservationController = {
       const reservation = await reservationModule
         .find({
           $or: [
-            { $and: [{ client_id }, { day: { $gt: date } }] },
+            { $and: [{ client_id }, { day: { $gte: date } }] },
             {
-              $and: [{ psyc_id }, { day: { $gt: date } }],
+              $and: [{ psyc_id }, { day: { $gte: date } }],
             },
           ],
         })

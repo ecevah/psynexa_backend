@@ -161,7 +161,6 @@ const psychologistController = {
       });
 
       const fileFilter = (req, file, cb) => {
-        // Sadece belirli dosya türlerine izin ver
         if (file.mimetype.startsWith("image/")) {
           cb(null, true);
         } else {

@@ -9,84 +9,16 @@ const talkSchema = new Schema({
     require: true,
     unique: true,
   },
-  depresyon: {
-    type: Number,
+  disorder_rate: {
+    type: String,
     require: true,
   },
-  bipolar: {
-    type: Number,
+  head_move: {
+    type: String,
     require: true,
   },
-  borderline: {
-    type: Number,
-    require: true,
-  },
-  agorafobi: {
-    type: Number,
-    require: true,
-  },
-  parkinson: {
-    type: Number,
-    require: true,
-  },
-  sosyalfobi: {
-    type: Number,
-    require: true,
-  },
-  debh: {
-    type: Number,
-    require: true,
-  },
-  paranoid: {
-    type: Number,
-    require: true,
-  },
-  cinsel: {
-    type: Number,
-    require: true,
-  },
-  okb: {
-    type: Number,
-    require: true,
-  },
-  demans: {
-    type: Number,
-    require: true,
-  },
-  madde: {
-    type: Number,
-    require: true,
-  },
-  yeme: {
-    type: Number,
-    require: true,
-  },
-  mutlu: {
-    type: Number,
-    require: true,
-  },
-  tiksinmis: {
-    type: Number,
-    require: true,
-  },
-  uzgun: {
-    type: Number,
-    require: true,
-  },
-  normal: {
-    type: Number,
-    require: true,
-  },
-  kizgin: {
-    type: Number,
-    require: true,
-  },
-  korkmus: {
-    type: Number,
-    require: true,
-  },
-  sasirmis: {
-    type: Number,
+  emotion: {
+    type: String,
     require: true,
   },
 });

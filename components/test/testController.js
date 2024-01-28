@@ -57,6 +57,40 @@ const testController = {
       });
     }
   },
+  list: async (req, res) => {
+    try {
+      const { psyc_id, client_id } = req.query;
+
+      // Filtreleme için boş bir nesne oluştur
+      const filter = {};
+
+      // psyc_id veya client_id varsa filtrele
+      if (psyc_id) {
+        filter.psyc_id = psyc_id;
+      }
+
+      if (client_id) {
+        filter.client_id = client_id;
+      }
+
+      const tests = await testModel
+        .find(filter)
+        .populate("psyc_id")
+        .populate("client_id");
+
+      res.json({
+        status: true,
+        message: "Tests listed successfully",
+        tests,
+      });
+    } catch (err) {
+      res.json({
+        status: false,
+        message: "Failed to list tests",
+        error: err.message,
+      });
+    }
+  },
 };
 
 module.exports = testController;
