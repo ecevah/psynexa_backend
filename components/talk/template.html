@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+      #pdf-inclusive {
+        max-width: 970px;
+        width: 970px;
+        display: flex;
+        flex-direction: column;
+        font-family: "Inter", sans-serif;
+        padding-top: 31px;
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-bottom:31px;
+        background-color: white;
+      }
+
+      #pdf-title-inclusive {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      #pdf-title-logo-inclusive {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      #pdf-title-logo-div {
+        background-color: #a283ff26;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+
+      #pdf-title-logo-text {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 14px;
+        letter-spacing: 0.1em;
+        text-align: center;
+      }
+
+      #pdf-title-content-inclusive {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #pdf-title-content-text {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 19px;
+        letter-spacing: 0.01em;
+        text-align: center;
+      }
+
+      #pdf-title-content-title {
+        font-size: 35px;
+        font-weight: 700;
+        line-height: 42px;
+        letter-spacing: 0.01em;
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      #content-border {
+        border: 1.5px solid #2c2e35;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        margin-top: 35px;
+      }
+      #content-border-second {
+        border: 1.5px solid #2c2e35;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        margin-top: 35px;
+        margin-bottom: 200px;
+      }
+
+      #cover-letter {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 22px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 22px;
+      }
+
+      #cover-letter-text {
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 17px;
+        letter-spacing: 0.01em;
+        text-align: left;
+        margin-bottom: 15px;
+      }
+
+      #cover-letter-title {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 19px;
+        letter-spacing: 0.01em;
+        text-align: left;
+      }
+
+      #pdf-gray-title {
+        border-top: 1.5px solid #2c2e35;
+        border-bottom: 1.5px solid #2c2e35;
+        text-align: center;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        width: 100%;
+        background-color: #c4c5c7;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 19px;
+        letter-spacing: 0.01em;
+        text-align: center;
+      }
+
+      #patient-information {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+      }
+
+      #patient-information-content {
+        width: 25%;
+        border-right: 1.5px solid #2c2e35;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      #patient-information-content-last {
+        width: 25%;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      #patient-information-title {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 14px;
+        letter-spacing: 0.01em;
+        text-align: left;
+      }
+
+      #patient-information-text {
+        font-family: SF Pro Display;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 18px;
+        letter-spacing: 0.01em;
+        text-align: left;
+      }
+
+      #disorder-rate {
+        width: 746px;
+        height: 560px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+      #head_move {
+        width: 866px;
+        height: 235px;
+        margin-bottom: 38px;
+      }
+
+      #emotion {
+        width: 866px;
+        height: 344px;
+        margin-top: 30px;
+        margin-bottom: 48px;
+      }
+
+      #footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 30px;
+      }
+
+      #footer-paragraph {
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 17px;
+        letter-spacing: 0.01em;
+        text-align: left;
+        margin-bottom: 17px;
+      }
+
+      ul {
+        margin-left: 17px;
+      }
+
+      li {
+        margin-bottom: 17px;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 17px;
+        letter-spacing: 0.01em;
+        text-align: left;
+        margin-bottom: 17px;
+      }
+    </style>
+  </head>
+  <body><div id="pdf-inclusive">
+        <div id="pdf-title-inclusive">
+          <div id="pdf-title-logo-inclusive">
+            <p id="pdf-title-logo-text">BELGE NO:01</p>
+            <div id="pdf-title-logo-div">
+              <img
+                id="pdf-logo"
+                src="http://localhost:3000/svg/logo.svg"
+                alt="logo"
+              ></img>
+            </div>
+            <p id="pdf-title-logo-text">YAPAY ZEKA</p>
+          </div>
+          <div id="pdf-title-content-inclusive">
+            <p id="pdf-title-content-text">
+              PSİKOLOJİK SAĞLIK DEĞERLENDİRMESİ - YAPAY ZEKA ANALİZİ
+            </p>
+            <p id="pdf-title-content-title">GÖRÜŞME ANALİZİ</p>
+          </div>
+          <div style="width: 135px"></div>
+        </div>
+        <div id="content-border">
+          <div id="cover-letter">
+            <p id="cover-letter-text">
+              Bu rapor, yapay zeka tarafından gerçekleştirilen görüşme analizi
+              sonuçlarını görsel olarak temsil eden grafikler içermektedir. Bu
+              grafikler, katılımcıların duygusal ifadelerini ve konuşma dilini
+              anlamamıza yardımcı olmak için oluşturulmuştur. Ancak, bu
+              grafikler sadece bir analiz aracıdır ve kesin sonuçlarını
+              yorumlamak için daha fazla bağlam gerekebilir. Raporun ilerleyen
+              bölümlerinde, bu grafiklerin daha ayrıntılı açıklamaları
+              bulunmaktadır. Lütfen bu grafikleri analiz etmek için diğer rapor
+              bölümlerini inceleyiniz ve sonuçları daha kapsamlı bir şekilde
+              değerlendirmek için uzman bir görüş almayı göz önünde
+              bulundurunuz.
+            </p>
+            <p id="cover-letter-title">
+              Tüm veriler, yapay zekanın görüşme sırasında oluşturduğu analiz
+              grafiklerini içerir ve kesin sonuçların yorumlanması için ek
+              bağlam gerekebilir.
+            </p>
+          </div>
+          <div id="pdf-gray-title">Hasta Bilgileri</div>
+          <div id="patient-information">
+            <div id="patient-information-content">
+              <p id="patient-information-title">Ad Soyad</p>
+              <p id="patient-information-text">{{name}}</p>
+            </div>
+            <div id="patient-information-content">
+              <p id="patient-information-title">Cinsiyet</p>
+              <p id="patient-information-text">{{gender}}</p>
+            </div>
+            <div id="patient-information-content">
+              <p id="patient-information-title">Doğum Tarihi</p>
+              <p id="patient-information-text">{{birthDate}}</p>
+            </div>
+            <div id="patient-information-content-last">
+              <p id="patient-information-title">Telefon Numarası</p>
+              <p id="patient-information-text">{{phoneNumber}}</p>
+            </div>
+          </div>
+          <div id="pdf-gray-title">Yapay Zeka Görüşme Analizi</div>
+          <img
+            id="disorder-rate"
+            src="http://localhost:3001/uploads/graph/{{chart1}}"
+            alt="Disorder Rate"
+          ></img>
+          <img
+            id="head_move"
+            src="http://localhost:3001/uploads/graph/{{chart2}}"
+            alt="Head Move"
+          ></img>
+        </div>
+      </div>
+      <div id="pdf-inclusive">
+        <div id="content-border-second">
+          <img
+            id="emotion"
+            src="http://localhost:3001/uploads/graph/{{chart3}}"
+            alt="Emotion"
+          ></img>
+          <div id="pdf-gray-title">
+            Psikolojik Sağlık Değerlendirmesi - Psikolog tarafından bilinmesi
+            gerekenler
+          </div>
+          <div id="footer">
+            <p id="footer-paragraph">
+              Belgeyi elde bulunduran psikolog, Psikolojik Görüşme Analizi’ni
+              gözden geçirebilir ve hasta başvurusu üzerine yeni veya yeniden
+              görüşme yapabilir.
+            </p>
+            <p id="footer-paragraph">
+              Görüşmenin tekrar kabul edilmesi veya reddedilmesine ilişkin son
+              karar psikoloğun sorumluluğundadır.
+            </p>
+            <p id="footer-paragraph">
+              Psikologlarda, tüm bilgileri dikkatlice ve okunaklı bir şekilde
+              her bölümü incelemeleri ve Psikolojik Görüşme Analizi’ni
+              incelerken bu talimatları takip etmeleri istenmektedir:
+            </p>
+            <ul className="list-disc">
+              <li>
+                <b>Görüşme Bilgileri:</b>
+                <br />
+                LÜTFEN görüşmede yer alan verileri ve tüm bilgileri düzgün bir
+                şekilde kontrol edin.
+              </li>
+              <li>
+                <b>Psikolog Raporu:</b>
+                <br />
+                #1 Uygulanan tüm grafikleri ve durumları inceleyin.
+                <br />
+                #2 Hastayla takip, süre ve en son muayene dahil olmak üzere
+                takip durumunu görüşmede belirtin.
+                <br />
+                #3 ANAliZLER, GEÇMİŞ RANDEVULARDA KAYDEDİLMİŞ OLARAK
+                BEKLEMEKTEDİR. Görüşme bittikten sonra bile geçmişten bu belgeye
+                ulaşmanız mümkün kılınmıştır.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div></body>
+</html>
