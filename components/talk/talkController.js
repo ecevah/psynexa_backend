@@ -29,104 +29,65 @@ const talkController = {
           message: "Talk with the same reservation_id already exists.",
         });
       } else {
-        const reservation1 = req.params.id;
-        const reservation = await reservationModule
-          .findById(req.params.id)
-          .populate("client_id");
-        console.log(reservation);
-        const storage = multer.diskStorage({
-          destination: function (req, file, cb) {
-            cb(null, "public/uploads/graph");
-          },
-          filename: function (req, file, cb) {
-            cb(
-              null,
-              file.fieldname +
-                "-" +
-                Date.now() +
-                path.extname(file.originalname)
-            );
-          },
+        const reservation_id = req.params.id;
+        const reservation = await reservationModule.findById(reservation_id);
+
+        const disorder_rate_photo = `${reservation_id}_disorder_plot.png`;
+        const head_move_photo = `${reservation_id}_head_move_plot.png`;
+        const emotion_photo = `${reservation_id}_emotion_plot.png`;
+        const htmlContent = fs.readFileSync(
+          path.join(__dirname, "template.html"),
+          "utf8"
+        );
+
+        const filledHtmlContent = htmlContent
+          .replace(
+            "{{name}}",
+            `${reservation.client_id.name} ${reservation.client_id.surName} `
+          )
+          .replace("{{gender}}", `${reservation.client_id.sex}`)
+          .replace("{{birthDate}}", `${reservation.client_id.name}`)
+          .replace(
+            "{{phoneNumber}}",
+            formatTarih(reservation.client_id.dateOfBirth)
+          )
+          .replace("{{chart1}}", disorder_rate_photo)
+          .replace("{{chart2}}", head_move_photo)
+          .replace("{{chart3}}", emotion_photo);
+
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.setContent(filledHtmlContent);
+        const pdfBuffer = await page.pdf({ format: "A4" });
+        await browser.close();
+
+        const pdfPath = path.join(
+          __dirname,
+          "..",
+          "..",
+          "public",
+          "uploads",
+          "pdf",
+          `${reservation_id}.pdf`
+        );
+
+        if (!fs.existsSync(path.dirname(pdfPath))) {
+          fs.mkdirSync(path.dirname(pdfPath), { recursive: true });
+        }
+
+        fs.writeFileSync(pdfPath, pdfBuffer);
+
+        const newTalk = await talkModel.create({
+          reservation_id: req.params.id,
+          disorder_rate: disorder_rate_photo,
+          head_move: head_move_photo,
+          emotion: emotion_photo,
         });
 
-        const upload = multer({
-          storage: storage,
-          fileFilter: function (req, file, cb) {
-            if (file.mimetype.startsWith("image/")) {
-              cb(null, true);
-            } else {
-              cb(new Error("Sadece resim dosyaları yüklenebilir."), false);
-            }
-          },
-        }).array("images", 3);
-
-        upload(req, res, async (err) => {
-          if (err) {
-            return res.json({
-              status: false,
-              message: "Not Added",
-              error: err,
-            });
-          } else {
-            const { reservation_id } = req.body;
-            const disorder_rate_photo = req.files[0].filename;
-            const head_move_photo = req.files[1].filename;
-            const emotion_photo = req.files[2].filename;
-            const htmlContent = fs.readFileSync(
-              path.join(__dirname, "template.html"),
-              "utf8"
-            );
-
-            const filledHtmlContent = htmlContent
-              .replace(
-                "{{name}}",
-                `${reservation.client_id.name} ${reservation.client_id.surName} `
-              )
-              .replace("{{gender}}", `${reservation.client_id.sex}`)
-              .replace("{{birthDate}}", `${reservation.client_id.name}`)
-              .replace(
-                "{{phoneNumber}}",
-                formatTarih(reservation.client_id.dateOfBirth)
-              )
-              .replace("{{chart1}}", disorder_rate_photo)
-              .replace("{{chart2}}", head_move_photo)
-              .replace("{{chart3}}", emotion_photo);
-
-            const browser = await puppeteer.launch();
-            const page = await browser.newPage();
-            await page.setContent(filledHtmlContent);
-            const pdfBuffer = await page.pdf({ format: "A4" });
-            await browser.close();
-
-            const pdfPath = path.join(
-              __dirname,
-              "..",
-              "..",
-              "public",
-              "uploads",
-              "pdf",
-              `${reservation1}.pdf`
-            );
-
-            if (!fs.existsSync(path.dirname(pdfPath))) {
-              fs.mkdirSync(path.dirname(pdfPath), { recursive: true });
-            }
-
-            fs.writeFileSync(pdfPath, pdfBuffer);
-
-            const newTalk = await talkModel.create({
-              reservation_id: req.params.id,
-              disorder_rate: disorder_rate_photo,
-              head_move: head_move_photo,
-              emotion: emotion_photo,
-            });
-
-            res.json({
-              status: true,
-              message: "Talk created successfully",
-              talk: newTalk,
-            });
-          }
+        res.json({
+          status: true,
+          message: "Talk created successfully",
+          talk: newTalk,
         });
       }
     } catch (err) {
