@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 mongoose.set("strictQuery", false);
 
 mongoose.connect(
-  "mongodb+srv://mazlum:qqwwqqww11@cluster0.4molq.mongodb.net/psynexa?retryWrites=true&w=majority"
+  "Mongo bağlantı linki"
 );
 mongoose.connection.on("open", () => {
   console.log("MongoDB: Connected");
